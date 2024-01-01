@@ -1,5 +1,6 @@
-from environment import initEnv, get_int_config_value,log
+from environment import initEnv, get_int_config_value,log, get_config_value
 from sys import argv
+from exrex import getone
 
 if (len(argv) < 3):
     raise Exception('Called with less as 2 arguments')
@@ -16,8 +17,9 @@ if (len(argv) > 3):
 
 
         
-if (command == 'helloworld'):
-    log.info("Hello World!")
+if (command == 'exrex'):
+    regexp = get_config_value('regexp')
+    log.info("Generated String: "+getone(regexp))
 else:
     raise Exception('Unknown command: '+command)
 
