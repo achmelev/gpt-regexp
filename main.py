@@ -10,6 +10,7 @@ initEnv(argv[1])
 
 from environment import log
 from generator import TextGenerator
+from train import Trainer
 
 
 command = argv[2]
@@ -25,12 +26,23 @@ def do_generate(args):
     generator = TextGenerator(prompt = prompt)
     generator.generate_console()
 
+def do_train(args):
+    if (args == None):
+        log.error("Wrong number of arguments for command train")
+    else:
+        minutes_to_train = int(args[0])
+        trainer = Trainer(minutes_to_train)
+        trainer.run()
+
+
 
 if (command == 'exrex'):
     regexp = get_config_value('regexp')
     log.info("Generated String: "+getone(regexp))
-if (command == 'generate'):
+elif (command == 'generate'):
     do_generate(args)
+elif (command == 'train'):
+    do_train(args)
 else:
     raise Exception('Unknown command: '+command)
 
